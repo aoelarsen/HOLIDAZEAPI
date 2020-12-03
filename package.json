@@ -4,8 +4,8 @@
   "description": "express middleware for a Noroff Project Exam",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development netlify-lambda serve src",
-    "build": "NODE_ENV=production netlify_lambda build src",
+    "start": "netlify-lambda serve src",
+    "build": "netlify_lambda build src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Anders Øksendal Larsen",

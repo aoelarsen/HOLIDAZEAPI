@@ -1,5 +1,6 @@
 'use strict';
 const express = require('express');
+const path = require('path');
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -48,15 +49,6 @@ router.get('/contacts', (req, res) => {
 router.get('/enquiries', (req, res) => {
   res.send(enquiries);
 });
-
-// POST OPERATIONS:
-
-// app.post('/api/establishments', (req, res) => {
-//   const establishements = {};
-// });
-
-// app.put();
-// app.delete();
 
 app.use(bodyParser.json());
 app.use(cors());
