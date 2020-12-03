@@ -12,3 +12,6 @@ node_modules
 
 # FaunaDB
 .faunarc 
+
+# Function folder
+functions

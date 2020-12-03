@@ -1,26 +1,37 @@
 'use strict';
 const express = require('express');
 const serverless = require('serverless-http');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+const router = express.Router();
 const establishments = require('../mockEstablishmentsData.json');
 const contacts = require('../mockContactData.json');
 const enquiries = require('../mockEnquiriesData.json');
 
 // GET OPERATIONS
 // Home
-app.get('/', (req, res) => {
-  const html = `<h1>Holidaze API</h1>
-  <p>An API created for Noroff students to use</p>`;
+router.get('/', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(
+    `<h1>Hello and welcome to Holdaze API</h1>
+      <h4>Endpoints:</h4>
+      <ul>
+        <li><a href="./establishments">/establishments</a></li>
+        <li><a href="./contacts">/contacts</a></li>
+        <li><a href="./enquiries">/enquiries</a></li>
+      </ul>`
+  );
+  res.end();
 });
 
 // Establishments
-app.get('/api/establishments', (req, res) => {
+router.get('/establishments', (req, res) => {
   res.send(establishments);
 });
 
-app.get('/api/establishments/:id', (req, res) => {
+router.get('/establishments/:id', (req, res) => {
   const establishment = establishments.find((est) => est.id === req.params.id);
   if (!establishment) {
     res.status(404).send('The establishment with the given id was not found');
@@ -29,12 +40,12 @@ app.get('/api/establishments/:id', (req, res) => {
 });
 
 // Contacts
-app.get('/api/contacts', (req, res) => {
+router.get('/contacts', (req, res) => {
   res.send(contacts);
 });
 
 // Enquiry
-app.get('/api/enquiries', (req, res) => {
+router.get('/enquiries', (req, res) => {
   res.send(enquiries);
 });
 
@@ -47,8 +58,9 @@ app.get('/api/enquiries', (req, res) => {
 // app.put();
 // app.delete();
 
-app.use(express.json());
-app.use('/.netlify/fuinctions/server', router);
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/.netlify/functions/api', router);
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 module.exports = app;
