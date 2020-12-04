@@ -19,9 +19,9 @@ router.get('/', (req, res) => {
     `<h1>Hello and welcome to Holdaze API</h1>
       <h4>Endpoints:</h4>
       <ul>
-        <li><a href="./establishments">/establishments</a></li>
-        <li><a href="./contacts">/contacts</a></li>
-        <li><a href="./enquiries">/enquiries</a></li>
+        <li><a href="./api/establishments">/establishments</a></li>
+        <li><a href="./api/contacts">/contacts</a></li>
+        <li><a href="./api/enquiries">/enquiries</a></li>
       </ul>`
   );
   res.end();
